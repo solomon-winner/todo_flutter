@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialState: AppState.initialState(),
     );
 
-    return StoreProvider(
+    return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -39,8 +39,41 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Redux Items"),
       ),
-      body: Container(),
+      body: StoreConnector<AppState, _ViewModel>(),
     );
   }
   
+}
+
+class _ViewModel {
+  final List<Item> items;
+  final Function(String) onAddItem;
+  final Function(Item) onRemoveItem;
+  final Function() onRemoveItems;
+
+  _ViewModel({
+    this.items,
+    this.onAddItem,
+    this.onRemoveItem,
+    this.onRemoveItems,
+  });
+
+  factory _ViewModel.create(Store<AppState> store) {
+    _onAddItem(String body) {
+      store.dispatch(AddItemAction(body));
+    }
+    _onRemoveItem(Item item) {
+      store.dispatch(RemoveItemAction(item));
+    }
+    _onRemoveItems() {
+      store.dispatch(RemoveItemsAction());
+    }
+
+    return _ViewModel(
+      items: store.state.items,
+      onAddItem: _onAddItem,
+      onRemoveItem: _onRemoveItem,
+      onRemoveItems: _onRemoveItems,
+    );
+  }
 }
