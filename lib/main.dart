@@ -53,7 +53,19 @@ class MyHomePage extends StatelessWidget {
   }
   
 }
-class RemoveItemsButton{}
+class RemoveItemsButton extends StatelessWidget{
+final _ViewModel model;
+RemoveItemsButton(this.model);
+
+@override
+
+Widget build (BuildContext context) {
+  return RaisedButton(
+    child: Text("Delete All Items"),
+    onPressed: () => model.onRemoveItems(),
+  );
+}
+}
 class ItemListWidget extends StatelessWidget{
   final _ViewModel model;
   ItemListWidget(this.model);
