@@ -53,7 +53,17 @@ class MyHomePage extends StatelessWidget {
   }
   
 }
+class RemoveItemsButton{}
+class ItemListWidget extends StatelessWidget{
+  final _ViewModel model;
+  ItemListWidget(this.model);
 
+  @override
+
+  Widget build (BuildContext context) {
+    return ListView();
+  }
+}
 class AddItemWidget extends StatefulWidget{
   final _ViewModel model;
   AddItemWidget(this.model);
