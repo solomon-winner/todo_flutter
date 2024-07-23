@@ -61,7 +61,14 @@ class ItemListWidget extends StatelessWidget{
   @override
 
   Widget build (BuildContext context) {
-    return ListView();
+    return ListView(
+      children: model.items.map((Item item) => ListTile(
+        title: Text(item.body),
+        leading: IconButton(
+          onPressed: () => model.onRemoveItem(item),
+         icon: Icon(Icons.delete)),
+      )).toList(),
+    );
   }
 }
 class AddItemWidget extends StatefulWidget{
