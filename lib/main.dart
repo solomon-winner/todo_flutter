@@ -15,6 +15,11 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    final Store<AppState> store = Store<AppState>(
+      appStateReducer,
+      initialState: AppState.initialState(),
+    );
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
@@ -35,5 +40,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
   
-
 }
