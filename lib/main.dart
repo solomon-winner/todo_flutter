@@ -20,10 +20,13 @@ class MyApp extends StatelessWidget {
       initialState: AppState.initialState(),
     );
 
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.dark(),
-      home: MyHomePage(),
+    return StoreProvider(
+      store: store,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark(),
+        home: MyHomePage(),
+      ),
     );
   }
 }
