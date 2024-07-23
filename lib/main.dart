@@ -39,11 +39,49 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Redux Items"),
       ),
-      body: StoreConnector<AppState, _ViewModel>(),
+      body: StoreConnector<AppState, _ViewModel>(
+        converter: (Store<AppState> store) => _ViewModel.create(store),
+        builder: (BuildContext context, _ViewModel viewModel) => Column(
+          children: <Widget>[
+            AddItemWidget(viewModel),
+            Expanded(child: ItemListWidget(viewModel)),
+            RemoveItemButton(viewModel),
+          ],
+          )
+      ),
     );
   }
   
 }
+
+class AddItemWidget extends StatefulWidget{
+  final _ViewModel model;
+  AddItemWidget(this.model);
+
+  @override
+  _AddItemState createState() => _AddItemState();
+
+
+}
+
+ class _AddItemState extends State<AddItemWidget> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: 'add an Item'
+      ),
+      onSubmitted: (String s) {
+        widget.model.onAddItem(s);
+        controller.text = '';
+      },
+    );
+  }
+  }
 
 class _ViewModel {
   final List<Item> items;
