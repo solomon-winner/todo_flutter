@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
@@ -35,9 +35,5 @@ class MyHomePage extends StatefulWidget {
     );
   }
   
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+
 }
