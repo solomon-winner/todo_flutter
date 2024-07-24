@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             AddItemWidget(viewModel),
             Expanded(child: ItemListWidget(viewModel)),
-            RemoveItemButton(viewModel),
+            RemoveItemsButton(viewModel),
           ],
           )
       ),
@@ -60,12 +60,13 @@ RemoveItemsButton(this.model);
 @override
 
 Widget build (BuildContext context) {
-  return RaisedButton(
+  return ElevatedButton(
     child: Text("Delete All Items"),
     onPressed: () => model.onRemoveItems(),
   );
 }
 }
+
 class ItemListWidget extends StatelessWidget{
   final _ViewModel model;
   ItemListWidget(this.model);
@@ -83,6 +84,7 @@ class ItemListWidget extends StatelessWidget{
     );
   }
 }
+
 class AddItemWidget extends StatefulWidget{
   final _ViewModel model;
   AddItemWidget(this.model);
@@ -119,10 +121,10 @@ class _ViewModel {
   final Function() onRemoveItems;
 
   _ViewModel({
-    this.items,
-    this.onAddItem,
-    this.onRemoveItem,
-    this.onRemoveItems,
+    required this.items,
+    required this.onAddItem,
+    required this.onRemoveItem,
+    required this.onRemoveItems,
   });
 
   factory _ViewModel.create(Store<AppState> store) {
